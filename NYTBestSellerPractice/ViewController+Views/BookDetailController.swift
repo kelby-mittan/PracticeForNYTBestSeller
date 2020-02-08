@@ -16,6 +16,8 @@ class BookDetailController: UIViewController {
         view = modallView
     }
     
+    public var selectedBook: Book?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,10 +27,26 @@ class BookDetailController: UIViewController {
         
         modallView.backgroundColor = .clear
 
+        updateUI()
 //        self.preferredContentSize = CGSize(width: 100, height: 100)
 //        createTheView()
     }
     
+    private func updateUI() {
+        
+        guard let book = selectedBook else { return }
+        
+        modallView.bookImageView.getImage(with: book.bookImage) {[weak self] (result) in
+            switch result {
+            case .failure:
+                self?.modallView.bookImageView.image = UIImage(systemName: "photo")
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.modallView.bookImageView.image = image
+                }
+            }
+        }
+    }
 
     private func createTheView() {
 

@@ -123,6 +123,8 @@ extension BookListController: UICollectionViewDelegateFlowLayout {
         //cell.bookImageView.isHidden = true
         let bookDetailVC = BookDetailController()
         //        navigationController?.pushViewController(bookDetailVC, animated: true)
+        let book = books[indexPath.row]
+        bookDetailVC.selectedBook = book
         self.present(bookDetailVC, animated: true)
         
         listView.geminiCollectionView.alpha = 0.15
