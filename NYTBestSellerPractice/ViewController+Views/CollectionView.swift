@@ -13,9 +13,10 @@ class CollectionView: UIView {
 
     public lazy var geminiCollectionView: GeminiCollectionView = {
         let layout = UICollectionViewFlowLayout()
+        
         layout.scrollDirection = .vertical
         
-//        layout.itemSize = CGSize(width: 120, height: 400)
+        layout.itemSize = CGSize(width: 120, height: 200)
         let cv = GeminiCollectionView(frame: CGRect.zero, collectionViewLayout: layout)
 //        cv.backgroundColor = .darkGray
 //        cv.isHidden = true

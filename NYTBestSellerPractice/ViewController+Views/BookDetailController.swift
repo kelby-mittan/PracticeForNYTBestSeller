@@ -9,23 +9,36 @@
 import UIKit
 
 class BookDetailController: UIViewController {
-
+    
+    public var modallView = BookDetailView()
+    
+    override func loadView() {
+        view = modallView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemTeal
-        // Do any additional setup after loading the view.
+//        view.backgroundColor = .clear
+//        view.alpha = 0.90
+//        view.isOpaque = false
+        
+        modallView.backgroundColor = .clear
+
+//        self.preferredContentSize = CGSize(width: 100, height: 100)
+//        createTheView()
     }
     
 
-    /*
-    // MARK: - Navigation
+    private func createTheView() {
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let xCoord = self.view.bounds.width / 2 - 165
+        let yCoord = self.view.bounds.height / 2 - 250
+        let width = self.view.bounds.width / 1.25
+        let height = self.view.bounds.height / 2
+        let centeredView = UIView(frame: CGRect(x: xCoord, y: yCoord, width: width, height: height))
+        centeredView.backgroundColor = .blue
+        self.view.addSubview(centeredView)
     }
-    */
 
 }

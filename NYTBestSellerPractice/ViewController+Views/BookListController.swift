@@ -25,6 +25,11 @@ class BookListController: UIViewController {
         view = listView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loadBooks()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +45,7 @@ class BookListController: UIViewController {
         //        listView.collectionView.register(BookCell.self, forCellWithReuseIdentifier: "bookCell")
         loadBooks()
         
-        //        addBackgroundGradient()
+        addBackgroundGradient()
         
         //        listView.collectionView.gemini
         //            .customAnimation()
@@ -58,7 +63,7 @@ class BookListController: UIViewController {
         listView.geminiCollectionView.gemini
             .cubeAnimation()
             .cubeDegree(90)
-            .alpha(0.15)
+        //            .alpha(0.15)
         //            .backgroundColor(startColor: .white, endColor: .black)
         //            .shadowEffect(.fadeOut)
         
@@ -99,7 +104,7 @@ extension BookListController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let maxSize: CGSize = UIScreen.main.bounds.size
-        let itemWidth: CGFloat = maxSize.width * 0.9
+        let itemWidth: CGFloat = maxSize.width * 0.75
         let itemHeight: CGFloat = maxSize.height * 0.70
         
         return CGSize(width: itemWidth, height: itemHeight)
@@ -115,8 +120,9 @@ extension BookListController: UICollectionViewDelegateFlowLayout {
         cell.selectedView.isHidden = true
         //cell.bookImageView.isHidden = true
         let bookDetailVC = BookDetailController()
-//        navigationController?.pushViewController(bookDetailVC, animated: true)
+        //        navigationController?.pushViewController(bookDetailVC, animated: true)
         self.present(bookDetailVC, animated: true)
+        listView.geminiCollectionView.alpha = 0.5
         cell.layoutIfNeeded()
         
     }
@@ -141,7 +147,7 @@ extension BookListController: UICollectionViewDataSource {
         
         listView.geminiCollectionView.animateCell(geminiCell)
         geminiCell.backgroundColor = .systemBackground
-        
+        geminiCell.geminiDelegate = self
         geminiCell.configureCell(for: book)
         //        cell.configureCell(for: book)
         return geminiCell
@@ -182,6 +188,6 @@ extension BookListController: GeminiCellDelegate {
     }
     
     private func deleteImageObject(indexPath: IndexPath) {
-                
+        books.remove(at: indexPath.row)
     }
 }
