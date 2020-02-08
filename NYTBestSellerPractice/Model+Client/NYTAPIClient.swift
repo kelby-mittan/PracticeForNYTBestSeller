@@ -11,7 +11,7 @@ import NetworkHelper
 
 struct NYTAPIClient {
     
-    static func getBooks(for category: String, completion: @escaping (Result<[Book], AppError>) -> ()) {
+    static func getBooks(for category: String, completion: @escaping (Result<(books: [Book], listName: String, bsDate: String), AppError>) -> ()) {
         
         let list = category.replacingOccurrences(of: " ", with: "-")
         let nytEndpointURL = "https://api.nytimes.com/svc/books/v3/lists/current/\(list).json?api-key=O4upADVEFCAGpp8dntBivAZci04II1uv"
@@ -31,7 +31,9 @@ struct NYTAPIClient {
                 do {
                     let bookSearch = try JSONDecoder().decode(BookSearch.self, from: data)
                     let bookHits = bookSearch.results.books
-                    completion(.success(bookHits))
+                    let listN = bookSearch.results.listName
+                    let nytDate = bookSearch.results.bestsellersDate
+                    completion(.success((books: bookHits, listName: listN, bsDate: nytDate)))
                 } catch {
                     completion(.failure(.decodingError(error)))
                 }

@@ -25,16 +25,19 @@ class BookListController: UIViewController {
         view = listView
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        loadBooks()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(true)
+//
+//        listView.geminiCollectionView.alpha = 1
+//        loadBooks()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         listView.geminiCollectionView.dataSource = self
         listView.geminiCollectionView.delegate = self
+        
         listView.collectionView.dataSource = self
         listView.collectionView.delegate = self
         
@@ -63,9 +66,8 @@ class BookListController: UIViewController {
         listView.geminiCollectionView.gemini
             .cubeAnimation()
             .cubeDegree(90)
-        //            .alpha(0.15)
-        //            .backgroundColor(startColor: .white, endColor: .black)
-        //            .shadowEffect(.fadeOut)
+//                    .alpha(0.15)
+        
         
         //        listView.geminiCollectionView.gemini
         //        .pitchRotationAnimation()
@@ -79,7 +81,7 @@ class BookListController: UIViewController {
             case .failure(let appError):
                 print("error: \(appError)")
             case .success(let bookArr):
-                self.books = bookArr
+                self.books = bookArr.books
             }
         }
     }
@@ -122,7 +124,8 @@ extension BookListController: UICollectionViewDelegateFlowLayout {
         let bookDetailVC = BookDetailController()
         //        navigationController?.pushViewController(bookDetailVC, animated: true)
         self.present(bookDetailVC, animated: true)
-        listView.geminiCollectionView.alpha = 0.5
+        
+        listView.geminiCollectionView.alpha = 0.15
         cell.layoutIfNeeded()
         
     }
@@ -155,6 +158,7 @@ extension BookListController: UICollectionViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         listView.geminiCollectionView.animateVisibleCells()
+        listView.geminiCollectionView.alpha = 1
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
