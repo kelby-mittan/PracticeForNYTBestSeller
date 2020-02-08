@@ -114,7 +114,9 @@ extension BookListController: UICollectionViewDelegateFlowLayout {
         print("cell\(indexPath.row)")
         cell.selectedView.isHidden = true
         //cell.bookImageView.isHidden = true
-        
+        let bookDetailVC = BookDetailController()
+//        navigationController?.pushViewController(bookDetailVC, animated: true)
+        self.present(bookDetailVC, animated: true)
         cell.layoutIfNeeded()
         
     }
@@ -156,4 +158,30 @@ extension BookListController: UICollectionViewDataSource {
         }
     }
     
+}
+
+extension BookListController: GeminiCellDelegate {
+    func didLongPress(_ imageCell: GeminiBookCell) {
+        print("delegate working")
+        
+        guard let indexPath = listView.geminiCollectionView.indexPath(for: imageCell) else {
+            return
+        }
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        present(alertController, animated: true)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] alertAction in
+            self?.deleteImageObject(indexPath: indexPath)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+    }
+    
+    private func deleteImageObject(indexPath: IndexPath) {
+                
+    }
 }

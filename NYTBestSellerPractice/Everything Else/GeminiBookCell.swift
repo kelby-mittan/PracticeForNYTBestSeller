@@ -10,6 +10,10 @@ import UIKit
 import ImageKit
 import Gemini
 
+protocol GeminiCellDelegate: AnyObject {
+    func didLongPress(_ imageCell: GeminiBookCell)
+}
+
 class GeminiBookCell: GeminiCell {
     
     public lazy var bookImageView: UIImageView = {
@@ -43,6 +47,7 @@ class GeminiBookCell: GeminiCell {
         return view
     }()
     
+    weak var geminiDelegate: GeminiCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -57,6 +62,18 @@ class GeminiBookCell: GeminiCell {
     private func commonInit() {
         setupImageConstraints()
         setupSelectedViewConstraints()
+    }
+    
+    private lazy var longPressGesture: UILongPressGestureRecognizer = {
+        let gesture = UILongPressGestureRecognizer()
+        gesture.addTarget(self, action: #selector(longPressAction(gesture:)))
+        return gesture
+    }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        addGestureRecognizer(longPressGesture)
     }
     
     private func setupImageConstraints() {
@@ -96,5 +113,12 @@ class GeminiBookCell: GeminiCell {
         }
     }
     
+    @objc private func longPressAction(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            gesture.state = .cancelled
+            return
+        }
+        geminiDelegate?.didLongPress(self)
+    }
 
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		016A4F5F26BDC19D6E88E05B /* Pods_NYTBestSellerPracticeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3E4BE72CEFA65C026C207B /* Pods_NYTBestSellerPracticeTests.framework */; };
 		02734FF223EE310C00AE3B28 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02734FF123EE310C00AE3B28 /* BookCell.swift */; };
+		02837F3D23EF40B000D7C173 /* BookDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02837F3C23EF40B000D7C173 /* BookDetailController.swift */; };
+		02837F3F23EF40D700D7C173 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02837F3E23EF40D700D7C173 /* BookDetailView.swift */; };
 		0283F11C23EDB22F006C8AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283F11B23EDB22F006C8AA6 /* AppDelegate.swift */; };
 		0283F11E23EDB22F006C8AA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283F11D23EDB22F006C8AA6 /* SceneDelegate.swift */; };
 		0283F12523EDB236006C8AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0283F12423EDB236006C8AA6 /* Assets.xcassets */; };
@@ -35,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		02734FF123EE310C00AE3B28 /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		02837F3C23EF40B000D7C173 /* BookDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailController.swift; sourceTree = "<group>"; };
+		02837F3E23EF40D700D7C173 /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		0283F11823EDB22F006C8AA6 /* NYTBestSellerPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NYTBestSellerPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0283F11B23EDB22F006C8AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0283F11D23EDB22F006C8AA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +91,17 @@
 			path = "Model+Client";
 			sourceTree = "<group>";
 		};
+		02837F3B23EF405F00D7C173 /* ViewController+Views */ = {
+			isa = PBXGroup;
+			children = (
+				0283F15223EDDBB9006C8AA6 /* BookListController.swift */,
+				0283F14823EDB4BF006C8AA6 /* CollectionView.swift */,
+				02837F3C23EF40B000D7C173 /* BookDetailController.swift */,
+				02837F3E23EF40D700D7C173 /* BookDetailView.swift */,
+			);
+			path = "ViewController+Views";
+			sourceTree = "<group>";
+		};
 		0283F10F23EDB22F006C8AA6 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +125,7 @@
 		0283F11A23EDB22F006C8AA6 /* NYTBestSellerPractice */ = {
 			isa = PBXGroup;
 			children = (
+				02837F3B23EF405F00D7C173 /* ViewController+Views */,
 				02837F3A23EF3FDC00D7C173 /* Model+Client */,
 				0283F13E23EDB26D006C8AA6 /* Everything Else */,
 				0283F13D23EDB24F006C8AA6 /* Supporting Files */,
@@ -141,8 +157,6 @@
 		0283F13E23EDB26D006C8AA6 /* Everything Else */ = {
 			isa = PBXGroup;
 			children = (
-				0283F15223EDDBB9006C8AA6 /* BookListController.swift */,
-				0283F14823EDB4BF006C8AA6 /* CollectionView.swift */,
 				0283F14C23EDC7B2006C8AA6 /* GeminiBookCell.swift */,
 				02734FF123EE310C00AE3B28 /* BookCell.swift */,
 			);
@@ -344,8 +358,10 @@
 			files = (
 				0283F14923EDB4BF006C8AA6 /* CollectionView.swift in Sources */,
 				0283F15323EDDBB9006C8AA6 /* BookListController.swift in Sources */,
+				02837F3F23EF40D700D7C173 /* BookDetailView.swift in Sources */,
 				0283F14523EDB3C1006C8AA6 /* NYTAPIClient.swift in Sources */,
 				0283F14D23EDC7B2006C8AA6 /* GeminiBookCell.swift in Sources */,
+				02837F3D23EF40B000D7C173 /* BookDetailController.swift in Sources */,
 				02734FF223EE310C00AE3B28 /* BookCell.swift in Sources */,
 				0283F14023EDB35F006C8AA6 /* NYTModel.swift in Sources */,
 				0283F11C23EDB22F006C8AA6 /* AppDelegate.swift in Sources */,
