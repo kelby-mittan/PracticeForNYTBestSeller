@@ -26,7 +26,7 @@ class BookDetailView: UIView {
         //        centeredV.frame.size = contentViewSize
         //        centeredV.layer.borderWidth = 4
         centeredV.layer.borderColor = UIColor.lightText.cgColor
-        centeredV.backgroundColor = .secondarySystemGroupedBackground
+        centeredV.backgroundColor = .systemBackground
         centeredV.isOpaque = false
         //        centeredV.backgroundColor = .quaternarySystemFill
         centeredV.alpha = 0.9
@@ -213,6 +213,7 @@ class BookDetailView: UIView {
             menuButton.centerYAnchor.constraint(equalTo: rankLabel.centerYAnchor),
             menuButton.trailingAnchor.constraint(equalTo: byLine.trailingAnchor)
         ])
+        menuButton.imageView?.contentMode = .scaleToFill
     }
     
     private func setupDescriptionConstraints() {

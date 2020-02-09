@@ -16,7 +16,11 @@ class BookDetailController: UIViewController {
         view = modallView
     }
     
+    private var googleBook = [GoogleBook]()
+    
     public var selectedBook: Book?
+    public var booksIsbn: String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +31,67 @@ class BookDetailController: UIViewController {
         
         modallView.backgroundColor = .clear
 
-        updateUI()
+        loadBooks()
+        updateBookImage()
 //        self.preferredContentSize = CGSize(width: 100, height: 100)
 //        createTheView()
+        updateUI()
+    }
+    private var googleTitle = "" {
+        didSet {
+            print(googleTitle)
+            updateUI()
+        }
+    }
+    
+    private func loadBooks() {
+        
+        guard let isbn = selectedBook?.primaryIsbn10 else {
+            return
+        }
+        
+        NYTAPIClient.getGoogleBooks(for: isbn) { [weak self] (result) in
+            switch result {
+            case .failure(let appError):
+                print("error: \(appError)")
+            case .success(let bookArr):
+                self?.googleBook = bookArr
+                self?.googleTitle = bookArr.first?.volumeInfo.title ?? "N/A"
+                DispatchQueue.main.async {
+                    self?.modallView.descriptionLabel.text = bookArr.first?.volumeInfo.description ?? "N/A"
+                    self?.modallView.bookTitle.text = bookArr.first?.volumeInfo.title ?? "N/A"
+                }
+                dump(bookArr)
+            }
+        }
     }
     
     private func updateUI() {
+        guard let book = selectedBook else {
+            return
+        }
+//        if title.lowercased() == googleTitle.lowercased() {
+//            print("THEYRE EQUAL")
+//            DispatchQueue.main.async {
+//                self.modallView.bookTitle.text = self.googleTitle
+//            }
+//
+//        } else {
+//            print("ERRRRRGHHHH")
+//        }
+        DispatchQueue.main.async {
+            self.modallView.rankLabel.text = "Rank: \(book.rank)"
+            self.modallView.byLine.text = book.contributor
+            if book.rankLastWeek == 0 {
+                self.modallView.weeksOnListLabel.text = "\(book.weeksOnList) weeks on list... Not ranked last week"
+            } else {
+                self.modallView.weeksOnListLabel.text = "\(book.weeksOnList) weeks on list. Ranked \(book.rankLastWeek) last week"
+            }
+        }
+        
+    }
+    
+    private func updateBookImage() {
         
         guard let book = selectedBook else { return }
         
@@ -61,3 +120,6 @@ class BookDetailController: UIViewController {
     }
 
 }
+
+
+
