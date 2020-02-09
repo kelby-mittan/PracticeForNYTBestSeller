@@ -46,7 +46,7 @@ class BookDetailView: UIView {
         label.numberOfLines = 3
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         //        label.textColor = .white
-        label.text = "Maybe you should talk to someone"
+        label.text = ""
         return label
     }()
     
@@ -55,7 +55,7 @@ class BookDetailView: UIView {
         label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         //        label.textColor = .white
-        label.text = "By Kobe Bryant and Kobe Bryant"
+        label.text = ""
         return label
     }()
     
@@ -64,7 +64,7 @@ class BookDetailView: UIView {
         label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         //        label.textColor = .white
-        label.text = "Rank: 1"
+        label.text = ""
         return label
     }()
     
@@ -73,7 +73,7 @@ class BookDetailView: UIView {
         label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         //        label.textColor = .white
-        label.text = "11 weeks on list"
+        label.text = ""
         return label
     }()
     
@@ -87,10 +87,10 @@ class BookDetailView: UIView {
     
     public lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 20
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         //        label.textColor = .white
-        label.text = "The Mamba Mentality: How I Play is Kobe Bryant’s personal perspective of his life and career on the basketball court and his exceptional, insightful style of playing the game—a fitting legacy from the late Los Angeles Laker superstar. In the wake of his retirement from professional basketball, Kobe “The Black Mamba” Bryant decided to share his vast knowledge and understanding of the game to take readers on an unprecedented journey to the core of the legendary “Mamba mentality.” Citing an obligation and an opportunity to teach young players, hardcore fans, and devoted students of the game how to play it “the right way,” The Mamba Mentality takes us inside the mind of one of the most intelligent, analytical, and creative basketball players ever. In his own words, Bryant reveals his famously detailed approach and the steps he took to prepare mentally and physically to not just succeed at the game, but to excel. Readers will learn how Bryant studied an opponent, how he channeled his passion for the game, how he played through injuries. They’ll also get fascinating granular detail as he breaks down specific plays and match-ups from throughout his career. Bryant’s detailed accounts are paired with stunning photographs by the Hall of Fame photographer Andrew D. Bernstein. Bernstein, long the Lakers and NBA official photographer, captured Bryant’s very first NBA photo in 1996 and his last in 2016—and hundreds of thousands in between, the record of a unique, twenty-year relationship between one athlete and one photographer. The combination of Bryant’s narrative and Bernstein’s photos make The Mamba Mentality an unprecedented look behind the curtain at the career of one of the world’s most celebrated and fascinating athletes."
+        label.text = ""
         return label
     }()
     
@@ -224,7 +224,7 @@ class BookDetailView: UIView {
             descriptionLabel.topAnchor.constraint(equalTo: weeksOnListLabel.bottomAnchor, constant: 2),
             descriptionLabel.leadingAnchor.constraint(equalTo: bookImageView.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: bookTitle.trailingAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: centerView.bottomAnchor)
+//            descriptionLabel.bottomAnchor.constraint(equalTo: centerView.bottomAnchor)
         ])
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class BookDetailController: UIViewController {
     
@@ -25,10 +26,7 @@ class BookDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        view.backgroundColor = .clear
-//        view.alpha = 0.90
-//        view.isOpaque = false
-        
+        modallView.menuButton.addTarget(self, action: #selector(linkButton(sender:)), for: .touchUpInside)
         modallView.backgroundColor = .clear
 
         loadBooks()
@@ -108,18 +106,55 @@ class BookDetailController: UIViewController {
         modallView.bookImageView.backgroundColor = .blue
     }
 
-    private func createTheView() {
-
-        let xCoord = self.view.bounds.width / 2 - 165
-        let yCoord = self.view.bounds.height / 2 - 250
-        let width = self.view.bounds.width / 1.25
-        let height = self.view.bounds.height / 2
-        let centeredView = UIView(frame: CGRect(x: xCoord, y: yCoord, width: width, height: height))
-        centeredView.backgroundColor = .blue
-        self.view.addSubview(centeredView)
+    @IBAction func linkButton(sender: UIButton) {
+        print("button pressed")
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        present(alertController, animated: true)
+        
+        let timesReviewAction = UIAlertAction(title: "NYT Review", style: .default) { [weak self] alertAction in
+            let nytWebString = self?.selectedBook?.bookReviewLink
+            guard let url = URL(string: nytWebString ?? "") else {
+                if nytWebString == "" {
+                    self?.showAlert(title: "Sorry", message: "The New York Times has yet to review this book.")
+                }
+                return
+            }
+            let safariNYTVC = SFSafariViewController(url: url)
+            self?.present(safariNYTVC, animated: true)
+        }
+        
+        let googleInfoAction = UIAlertAction(title: "Google", style: .default) { [weak self] alertAction in
+            let googleWebString = self?.googleBook.first?.volumeInfo.previewLink
+            guard let url = URL(string: googleWebString ?? "") else {
+                if googleWebString == "" {
+                    self?.showAlert(title: "Sorry", message: "There is no preview of this book available on Google Books.")
+                }
+                return
+            }
+            let safariNYTVC = SFSafariViewController(url: url)
+            self?.present(safariNYTVC, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alertController.addAction(timesReviewAction)
+        alertController.addAction(googleInfoAction)
+        alertController.addAction(cancelAction)
+        
     }
 
 }
 
 
-
+extension UIViewController {
+    func showAlert(title: String, message: String, completion: ((UIAlertAction) -> Void)? = nil) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: completion)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+}

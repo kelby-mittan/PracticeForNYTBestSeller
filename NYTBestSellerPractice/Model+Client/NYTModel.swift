@@ -47,6 +47,7 @@ struct Book: Codable & Equatable {
     let bookImage: String
     let contributor: String
     let primaryIsbn10: String
+    let bookReviewLink: String
     private enum CodingKeys: String, CodingKey {
         case rank
         case rankLastWeek = "rank_last_week"
@@ -58,6 +59,7 @@ struct Book: Codable & Equatable {
         case bookImage = "book_image"
         case contributor
         case primaryIsbn10 = "primary_isbn10"
+        case bookReviewLink = "book_review_link"
     }
 }
 
@@ -73,6 +75,8 @@ struct GoogleBook: Codable & Equatable {
 struct Info: Codable & Equatable {
     let title: String
     let description: String
+    let previewLink: String
+    let infoLink: String
 }
 
 
