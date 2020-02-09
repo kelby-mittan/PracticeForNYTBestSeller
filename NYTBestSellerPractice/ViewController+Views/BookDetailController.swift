@@ -46,6 +46,7 @@ class BookDetailController: UIViewController {
                 }
             }
         }
+        modallView.bookImageView.backgroundColor = .blue
     }
 
     private func createTheView() {
