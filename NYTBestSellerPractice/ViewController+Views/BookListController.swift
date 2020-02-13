@@ -128,7 +128,7 @@ extension BookListController: UICollectionViewDelegateFlowLayout {
     
         self.present(bookDetailVC, animated: true)
         
-        listView.geminiCollectionView.alpha = 0.15
+        listView.geminiCollectionView.alpha = 0.25
         cell.layoutIfNeeded()
         
     }
