@@ -146,7 +146,7 @@ class BookDetailController: UIViewController {
         let appearance = SCLAlertView.SCLAppearance(
             
             kCircleBackgroundTopPosition: 0,
-            kCircleIconHeight: 180,
+            kCircleIconHeight: 120,
             showCircularIcon: true,
             circleBackgroundColor: .clear
         
@@ -172,7 +172,7 @@ class BookDetailController: UIViewController {
         
         let image = UIImage.gif(name: "bookGIF2")!
         
-        alertView.showCustom("Yo", subTitle: "whatup", color: .systemFill, icon: image)
+        alertView.showCustom("Yo", subTitle: "whatup", color: .clear, icon: image)
 //        alertView.showSuccess("", subTitle: "", circleIconImage: image)
         
     }
