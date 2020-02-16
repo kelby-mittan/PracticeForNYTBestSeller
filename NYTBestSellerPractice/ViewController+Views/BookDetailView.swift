@@ -240,7 +240,7 @@ class BookDetailView: UIView {
         sv.contentSize = CGSize(width: (self.frame.width * 0.75), height: (self.frame.height * 0.658))
         sv.layer.borderWidth = 4
         sv.layer.borderColor = UIColor.lightText.cgColor
-        sv.backgroundColor = .placeholderText
+        sv.backgroundColor = .systemBackground
         return sv
     }()
     
@@ -268,7 +268,7 @@ class BookDetailView: UIView {
         let label = UILabel()
         label.numberOfLines = 3
         label.font = UIFont.preferredFont(forTextStyle: .headline)
-                label.textColor = .white
+//                label.textColor = .white
         label.text = ""
         return label
     }()
@@ -302,9 +302,10 @@ class BookDetailView: UIView {
     
     public lazy var menuButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "book.fill"), for: .normal)
+        let image = UIImage.gif(name: "bookGIF3")!
+        button.setImage(image, for: .normal)
         //        button.contentMode = .scaleToFill
-        button.imageView?.contentMode = .scaleToFill
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -312,7 +313,7 @@ class BookDetailView: UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-                label.textColor = .white
+//                label.textColor = .white
         label.text = ""
         return label
     }()
@@ -433,7 +434,7 @@ class BookDetailView: UIView {
         NSLayoutConstraint.activate([
             menuButton.widthAnchor.constraint(equalToConstant: 60),
             menuButton.heightAnchor.constraint(equalToConstant: 60),
-            menuButton.centerYAnchor.constraint(equalTo: rankLabel.centerYAnchor),
+            menuButton.bottomAnchor.constraint(equalTo: rankLabel.bottomAnchor),
             menuButton.trailingAnchor.constraint(equalTo: byLine.trailingAnchor)
         ])
         menuButton.imageView?.contentMode = .scaleToFill

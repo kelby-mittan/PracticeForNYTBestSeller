@@ -143,8 +143,18 @@ class BookDetailController: UIViewController {
         //        alertController.addAction(googleInfoAction)
         //        alertController.addAction(cancelAction)
         
-        let alertView = SCLAlertView()
-        alertView.addButton("First Button") {
+        let appearance = SCLAlertView.SCLAppearance(
+            
+            kCircleBackgroundTopPosition: 0,
+            kCircleIconHeight: 180,
+            showCircularIcon: true,
+            circleBackgroundColor: .clear
+        
+        )
+        
+        let alertView = SCLAlertView(appearance: appearance)
+        
+        alertView.addButton("NYT Review", backgroundColor: .gray) {
             print("first button")
             let nytWebString = self.selectedBook?.bookReviewLink
             guard let url = URL(string: nytWebString ?? "") else {
@@ -156,10 +166,14 @@ class BookDetailController: UIViewController {
             let safariNYTVC = SFSafariViewController(url: url)
             self.present(safariNYTVC, animated: true)
         }
-        alertView.addButton("Second Button") {
+        alertView.addButton("Second Button", backgroundColor: .gray) {
             print("Second button tapped")
         }
-        alertView.showSuccess("Button View", subTitle: "This alert view has buttons")
+        
+        let image = UIImage.gif(name: "bookGIF2")!
+        
+        alertView.showCustom("Yo", subTitle: "whatup", color: .systemFill, icon: image)
+//        alertView.showSuccess("", subTitle: "", circleIconImage: image)
         
     }
     
