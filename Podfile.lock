@@ -1,16 +1,20 @@
 PODS:
   - Gemini (1.4.0)
+  - SCLAlertView (0.8)
 
 DEPENDENCIES:
   - Gemini
+  - SCLAlertView
 
 SPEC REPOS:
   trunk:
     - Gemini
+    - SCLAlertView
 
 SPEC CHECKSUMS:
   Gemini: 4ad915cca8805577fe3021e02feeca2b77dcdbfc
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
 
-PODFILE CHECKSUM: 3765979260078f5e754775fe5b5bd76e8403fafc
+PODFILE CHECKSUM: db5f5f36ef770e264f9c054d830780b566e32678
 
 COCOAPODS: 1.8.4

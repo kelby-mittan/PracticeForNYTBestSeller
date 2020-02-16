@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import SCLAlertView
 
 class BookDetailController: UIViewController {
     
@@ -25,14 +26,14 @@ class BookDetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         modallView.menuButton.addTarget(self, action: #selector(linkButton(sender:)), for: .touchUpInside)
         modallView.backgroundColor = .clear
-
+        
         loadBooks()
         updateBookImage()
-//        self.preferredContentSize = CGSize(width: 100, height: 100)
-//        createTheView()
+        //        self.preferredContentSize = CGSize(width: 100, height: 100)
+        //        createTheView()
         updateUI()
     }
     private var googleTitle = "" {
@@ -68,15 +69,15 @@ class BookDetailController: UIViewController {
         guard let book = selectedBook else {
             return
         }
-//        if title.lowercased() == googleTitle.lowercased() {
-//            print("THEYRE EQUAL")
-//            DispatchQueue.main.async {
-//                self.modallView.bookTitle.text = self.googleTitle
-//            }
-//
-//        } else {
-//            print("ERRRRRGHHHH")
-//        }
+        //        if title.lowercased() == googleTitle.lowercased() {
+        //            print("THEYRE EQUAL")
+        //            DispatchQueue.main.async {
+        //                self.modallView.bookTitle.text = self.googleTitle
+        //            }
+        //
+        //        } else {
+        //            print("ERRRRRGHHHH")
+        //        }
         DispatchQueue.main.async {
             self.modallView.rankLabel.text = "Rank: \(book.rank)"
             self.modallView.byLine.text = book.contributor
@@ -105,45 +106,63 @@ class BookDetailController: UIViewController {
         }
         modallView.bookImageView.backgroundColor = .blue
     }
-
+    
     @IBAction func linkButton(sender: UIButton) {
-        print("button pressed")
+        //        print("button pressed")
+        //
+        //        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        //        present(alertController, animated: true)
+        //
+        //        let timesReviewAction = UIAlertAction(title: "NYT Review", style: .default) { [weak self] alertAction in
+        //            let nytWebString = self?.selectedBook?.bookReviewLink
+        //            guard let url = URL(string: nytWebString ?? "") else {
+        //                if nytWebString == "" {
+        //                    self?.showAlert(title: "Sorry", message: "The New York Times has yet to review this book.")
+        //                }
+        //                return
+        //            }
+        //            let safariNYTVC = SFSafariViewController(url: url)
+        //            self?.present(safariNYTVC, animated: true)
+        //        }
+        //
+        //        let googleInfoAction = UIAlertAction(title: "Google", style: .default) { [weak self] alertAction in
+        //            let googleWebString = self?.googleBook.first?.volumeInfo.previewLink
+        //            guard let url = URL(string: googleWebString ?? "") else {
+        //                if googleWebString == "" {
+        //                    self?.showAlert(title: "Sorry", message: "There is no preview of this book available on Google Books.")
+        //                }
+        //                return
+        //            }
+        //            let safariNYTVC = SFSafariViewController(url: url)
+        //            self?.present(safariNYTVC, animated: true)
+        //        }
+        //
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        //
+        //        alertController.addAction(timesReviewAction)
+        //        alertController.addAction(googleInfoAction)
+        //        alertController.addAction(cancelAction)
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        present(alertController, animated: true)
-        
-        let timesReviewAction = UIAlertAction(title: "NYT Review", style: .default) { [weak self] alertAction in
-            let nytWebString = self?.selectedBook?.bookReviewLink
+        let alertView = SCLAlertView()
+        alertView.addButton("First Button") {
+            print("first button")
+            let nytWebString = self.selectedBook?.bookReviewLink
             guard let url = URL(string: nytWebString ?? "") else {
                 if nytWebString == "" {
-                    self?.showAlert(title: "Sorry", message: "The New York Times has yet to review this book.")
+                    self.showAlert(title: "Sorry", message: "The New York Times has yet to review this book.")
                 }
                 return
             }
             let safariNYTVC = SFSafariViewController(url: url)
-            self?.present(safariNYTVC, animated: true)
+            self.present(safariNYTVC, animated: true)
         }
-        
-        let googleInfoAction = UIAlertAction(title: "Google", style: .default) { [weak self] alertAction in
-            let googleWebString = self?.googleBook.first?.volumeInfo.previewLink
-            guard let url = URL(string: googleWebString ?? "") else {
-                if googleWebString == "" {
-                    self?.showAlert(title: "Sorry", message: "There is no preview of this book available on Google Books.")
-                }
-                return
-            }
-            let safariNYTVC = SFSafariViewController(url: url)
-            self?.present(safariNYTVC, animated: true)
+        alertView.addButton("Second Button") {
+            print("Second button tapped")
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        alertController.addAction(timesReviewAction)
-        alertController.addAction(googleInfoAction)
-        alertController.addAction(cancelAction)
+        alertView.showSuccess("Button View", subTitle: "This alert view has buttons")
         
     }
-
+    
 }
 
 

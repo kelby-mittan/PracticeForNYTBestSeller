@@ -8,6 +8,7 @@ target 'NYTBestSellerPractice' do
   # Pods for NYTBestSellerPractice
 
 pod 'Gemini'
+pod 'SCLAlertView'
 
   target 'NYTBestSellerPracticeTests' do
     inherit! :search_paths
