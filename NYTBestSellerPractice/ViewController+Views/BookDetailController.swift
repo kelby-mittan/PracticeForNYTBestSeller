@@ -144,9 +144,10 @@ class BookDetailController: UIViewController {
         //        alertController.addAction(cancelAction)
         
         let appearance = SCLAlertView.SCLAppearance(
-            
+    
             kCircleBackgroundTopPosition: 0,
-            kCircleIconHeight: 120,
+            kCircleHeight: 100,
+            kCircleIconHeight: 80,
             showCircularIcon: true,
             circleBackgroundColor: .clear
         
@@ -154,25 +155,36 @@ class BookDetailController: UIViewController {
         
         let alertView = SCLAlertView(appearance: appearance)
         
-        alertView.addButton("NYT Review", backgroundColor: .gray) {
+        alertView.addButton("NYT Review") { [weak self] in
             print("first button")
-            let nytWebString = self.selectedBook?.bookReviewLink
+            let nytWebString = self?.selectedBook?.bookReviewLink
             guard let url = URL(string: nytWebString ?? "") else {
                 if nytWebString == "" {
-                    self.showAlert(title: "Sorry", message: "The New York Times has yet to review this book.")
+                    self?.showAlert(title: "Sorry", message: "The New York Times has yet to review this book.")
                 }
                 return
             }
             let safariNYTVC = SFSafariViewController(url: url)
-            self.present(safariNYTVC, animated: true)
+            self?.present(safariNYTVC, animated: true)
         }
-        alertView.addButton("Second Button", backgroundColor: .gray) {
-            print("Second button tapped")
+        alertView.addButton("Preview on Google") { [weak self] in
+            let googleWebString = self?.googleBook.first?.volumeInfo.previewLink
+            guard let url = URL(string: googleWebString ?? "") else {
+                if googleWebString == "" {
+                    self?.showAlert(title: "Sorry", message: "There is no preview of this book available on Google Books.")
+                }
+                return
+            }
+            let safariNYTVC = SFSafariViewController(url: url)
+            self?.present(safariNYTVC, animated: true)
         }
         
         let image = UIImage.gif(name: "bookGIF2")!
+        let title = selectedBook?.title
         
-        alertView.showCustom("Yo", subTitle: "whatup", color: .clear, icon: image)
+        
+        
+        alertView.showCustom("  ", subTitle: "\(title ?? "N/A")", color: .systemTeal, icon: image)
 //        alertView.showSuccess("", subTitle: "", circleIconImage: image)
         
     }
